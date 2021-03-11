@@ -1,0 +1,412 @@
+swagger: '2.0'
+consumes:
+  - application/json
+  - application/xml
+produces:
+  - application/json
+  - application/xml
+schemes:
+  - http
+  - https
+info:
+  title: 'Cerci API.'
+  version: 0.0.1
+host: localhost:8080
+
+tags:
+  - name: Employee
+    description: Create Employee API
+  - name: Health
+    description: Check application health/statistics.
+
+
+paths: 
+  /news:
+    post:
+      tags:
+        - news
+      summary: Add news item
+      operationId: addNews  
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: Add news item 
+          required: true
+          schema:
+            $ref: '#/definitions/NewsRequest'
+      responses:
+        "200":
+          $ref: '#/responses/NewsResponse'    
+
+  
+    get:
+      tags:
+        - news
+      summary: Get all news item
+      description: ''
+      operationId: getAllNews
+      produces:
+        - application/json
+      responses:
+        "200":
+          $ref: '#/responses/NewsResponse'  
+        '404':
+          description: News item  not found
+
+
+  /news/{id}: 
+    get:
+      tags:
+        - news
+      summary: Find news item
+      description: ''
+      operationId: getNewsItem
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: ''
+          required: true
+          id:
+           format: int64
+           type: integer
+      responses:
+        "200":
+          $ref: '#/responses/NewsResponse'  
+        '404':
+          description: News item  not found
+
+  
+    delete:
+      tags:
+        - news
+      summary: Get news item
+      description: ''
+      operationId: deleteNewsId
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: ''
+          required: true
+          id:
+           format: int64
+           type: integer  
+      responses:
+        "200":
+          $ref: '#/responses/NewsResponse'  
+        '404':
+          description: News item  not found
+
+  /health:
+    get:
+      summary: Availability check
+      tags: ['Health']
+      description: 'A health check '
+      responses:
+        '200':
+          description: service is healthy
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+              version:
+                type: string
+              listen_addr:
+                type: string
+
+
+  /project:
+    post:
+      tags:
+        - project
+      summary: Add project item
+      operationId: addProject  
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: Add project item 
+          required: true
+          schema:
+            $ref: '#/definitions/ProjectRequest'
+      responses:
+        "200":
+          $ref: '#/responses/ProjectResponse'    
+
+  
+    get:
+      tags:
+        - project
+      summary: Get all project item
+      description: ''
+      operationId: getAllProject
+      produces:
+        - application/json
+      responses:
+        "200":
+          $ref: '#/responses/ProjectResponse'  
+        '404':
+          description: Project item  not found
+
+
+  /project/{id}: 
+    get:
+      tags:
+        - project
+      summary: Find project item
+      description: ''
+      operationId: findProjectItem
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: ''
+          required: true
+          id:
+           format: int64
+           type: integer
+      responses:
+        "200":
+          $ref: '#/responses/ProjectResponse'  
+        '404':
+          description: News item  not found
+
+  
+    delete:
+      tags:
+        - project
+      summary: Delete project item
+      description: ''
+      operationId: deleteProjectId
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: ''
+          required: true
+          id:
+           format: int64
+           type: integer  
+      responses:
+        "200":
+          $ref: '#/responses/ProjectResponse'  
+        '404':
+          description: Project item  not found                
+
+
+
+  /job:
+    post:
+      tags:
+        - job
+      summary: Add job item
+      operationId: addJob
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: Created job item 
+          required: true
+          schema:
+            $ref: '#/definitions/JobRequest'
+      responses:
+        "200":
+          $ref: '#/responses/JobResponse'    
+
+  
+    get:
+      tags:
+        - job
+      summary: Get all job item
+      description: ''
+      operationId: getAllJob
+      produces:
+        - application/json
+      responses:
+        "201":
+          $ref: '#/responses/JobResponse'  
+        '404':
+          description: Job item  not found
+
+
+  /job/{id}: 
+    get:
+      tags:
+        - job
+      summary: Find job item
+      description: ''
+      operationId: findJobItem
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: ''
+          required: true
+          id:
+           format: int64
+           type: integer
+      responses:
+        "200":
+          $ref: '#/responses/JobResponse'  
+        '404':
+          description: Job item  not found
+
+  
+    delete:
+      tags:
+        - job
+      summary: Delete job item
+      description: ''
+      operationId: deleteJobId
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: ''
+          required: true
+          id:
+           format: int64
+           type: integer  
+      responses:
+        "200":
+          $ref: '#/responses/JobResponse'  
+        '404':
+          description: Job item  not found                          
+
+
+
+
+definitions:
+  JobRequest:
+    description: JobRequest struct
+    properties:
+      cv_message:
+        type: string
+        x-go-name: CvMessage
+      department:
+        type: string
+        x-go-name: Department
+      email:
+        type: string
+        x-go-name: Email
+      first_name:
+        type: string
+        x-go-name: FirstName
+      last_name:
+        type: string
+        x-go-name: LastName
+      phone_number:
+        type: string
+        x-go-name: PhoneNumber
+    type: object
+    x-go-package: github.com/codonex/cerci-service
+  NewsRequest:
+    description: NewsRequest request struct
+    properties:
+      detail:
+        type: string
+        x-go-name: Detail
+      news_image:
+        format: uint8
+        type: integer
+        x-go-name: NewsImage
+      title:
+        type: string
+        x-go-name: Title
+    type: object
+    x-go-package: github.com/codonex/cerci-service
+  ProjectRequest:
+    description: ProjectRequest response struct
+    properties:
+      detail:
+        type: string
+        x-go-name: Detail
+      finish_date:
+        format: date-time
+        type: string
+        x-go-name: FinishDate
+      project_images:
+        items:
+          items:
+            format: uint8
+            type: integer
+          type: array
+        type: array
+        x-go-name: ProjectImages
+      project_name:
+        type: string
+        x-go-name: ProjectName
+      start_date:
+        format: date-time
+        type: string
+        x-go-name: StartDate
+    type: object
+    x-go-package: github.com/codonex/cerci-service
+
+responses:
+  JobResponse:
+    description: JobResponse struct
+    headers:
+      cv_message:
+        type: string
+      department:
+        type: string
+      email:
+        type: string
+      first_name:
+        type: string
+      id:
+        format: int64
+        type: integer
+      last_name:
+        type: string
+      phone_number:
+        type: string
+  NewsResponse:
+    description: NewsResponse response struct
+    headers:
+      detail:
+        type: string
+      id:
+        format: int64
+        type: integer
+      news_image:
+        format: uint8
+        type: integer
+      title:
+        type: string
+  ProjectResponse:
+    description: ProjectResponse response struct
+    headers:
+      detail:
+        type: string
+      finish_date:
+        format: date-time
+        type: string
+      id:
+        format: int64
+        type: integer
+      project_images:
+        items:
+          items:
+            format: uint8
+            type: integer
+          type: array
+        type: array
+      project_name:
+        type: string
+      start_date:
+        format: date-time
+        type: string

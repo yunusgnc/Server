@@ -1,0 +1,20 @@
+[
+    {
+      "Name": "vasıta",
+      "Type": "otomobil",
+      "Children": [
+        {
+          "Name": "Acura",
+          "Type": "Acura",
+          "Children": [
+            {
+              "Name": "2.2CL"
+            },
+            {
+              "Name": "2.3CL"
+            }
+          ]
+        }
+      ]
+    }
+  ]
